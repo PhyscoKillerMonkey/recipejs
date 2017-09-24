@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "browser-sync": "browser-sync start -p \"localhost:8080\" -f \"**/*\""
   },
   "author": "Reece Bennett",
   "license": "ISC",
