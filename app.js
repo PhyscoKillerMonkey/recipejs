@@ -27,7 +27,8 @@ MongoClient.connect(db.url, (err, database) => {
 
   // Define routes
   app.use("/", require("./routes/index"));
-  app.use("/recipes", require("./routes/recipes/index.js")(database));
+  app.use("/recipes", require("./routes/recipes")(database));
+  app.use("/api", require("./routes/api")(database));
 
   // Database connected, start the server now
   app.listen(port, () => {
