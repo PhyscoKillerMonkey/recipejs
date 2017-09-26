@@ -25,11 +25,14 @@ MongoClient.connect(db.url, (err, database) => {
     return;
   }
 
+  // Create the database controller
+  const dcController = require("./dbController.js")(database);
+
   // Define routes
   app.use("/", require("./routes/index"));
-  app.use("/recipes", require("./routes/recipes")(database));
-  app.use("/new", require("./routes/new")(database));
-  app.use("/api", require("./routes/api")(database));
+  app.use("/recipes", require("./routes/recipes")(dcController));
+  app.use("/new", require("./routes/new")(dcController));
+  app.use("/api", require("./routes/api")(dcController));
 
   // Database connected, start the server now
   app.listen(port, () => {
