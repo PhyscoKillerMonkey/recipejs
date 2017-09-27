@@ -1,5 +1,17 @@
 extends layout
 
+block head
+  style.
+    .mainTitle {
+      margin-bottom: 0.2rem;
+    }
+
+    .tagLine {
+      margin: 0;
+    }
+
 block content
-  h1= recipe.title
-  p= recipe.author + " - " + formatTime(recipe.time)
+  h1.mainTitle= recipe.title
+  h4.tagLine= recipe.author + " - " + formatTime(recipe.time)
+  p= recipe.text
+  button(onclick=`deleteRecipe('${recipe._id}')`) Delete
