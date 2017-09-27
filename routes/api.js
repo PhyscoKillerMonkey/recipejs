@@ -34,7 +34,13 @@ module.exports = (db) => {
 
     const recipe = {};
 
-    db.getRecipe(recipe, (err, result) => {
+    ["title", "author", "time", "text"].forEach((field) => {
+      recipe[field] = req.body[field];
+    });
+
+    console.log(recipe);
+
+    db.createRecipe(recipe, (err, result) => {
       if (err) {
         res.json({ error: "Could not create the recipe" });
       } else {

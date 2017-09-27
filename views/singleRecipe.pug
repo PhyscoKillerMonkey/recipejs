@@ -1,0 +1,5 @@
+extends layout
+
+block content
+  h1= recipe.title
+  p= recipe.author + " - " + formatTime(recipe.time)

@@ -5,6 +5,20 @@ html
     title= title
     link(rel="stylesheet", href="/stylesheets/normalize.css")
     link(rel="stylesheet", href="/stylesheets/master.css")
+
+    -
+      function formatTime(time) {
+        var h = Math.floor(time / 60);
+        var m = time % 60;
+        var output = "";
+        if (h > 0) output += h + " hour";
+        if (h > 1) output += "s";
+        if (h > 0 && m > 0) output += ", ";
+        if (m > 0) output += m + " min";
+        if (m > 1) output += "s";
+        return output;
+      }
+
     block head
 
   body

@@ -5,11 +5,17 @@ const router = require("express").Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    res.render("index", { title: "List of all recipes" });
+    db.getAllRecipes((err, docs) => {
+      if (err) res.status(400);
+      res.render("allRecipes", { title: "All Recipes", recipes: docs });
+    });
   });
 
   router.get("/:id", (req, res) => {
-    res.render("index", { title: `Single recipe page for: ${req.params.id}` });
+    db.getRecipe(req.params.id, (err, docs) => {
+      if (err) res.status(400);
+      res.render("singleRecipe", { title: docs.title, recipe: docs });
+    });
   });
 
   return router;
