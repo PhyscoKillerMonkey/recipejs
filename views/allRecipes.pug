@@ -2,6 +2,10 @@ extends layout
 
 block head
   style.
+    .listItem {
+      margin-top: 1rem;
+    }
+
     .listItem .title {
       margin: 0 0 0.25rem 0;
       font-size: 1.5em;
@@ -16,6 +20,8 @@ block head
 
 block content
   h1 Browse Recipes
+
+  a(href="/new") Create a recipe
 
   #recipeList
     each recipe in recipes

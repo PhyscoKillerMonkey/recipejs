@@ -11,6 +11,7 @@ block head
     }
 
 block content
+  a(href="/recipes") Back to browse
   h1.mainTitle= recipe.title
   h4.tagLine= recipe.author + " - " + formatTime(recipe.time)
   p= recipe.description
