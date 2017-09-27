@@ -13,5 +13,5 @@ block head
 block content
   h1.mainTitle= recipe.title
   h4.tagLine= recipe.author + " - " + formatTime(recipe.time)
-  p= recipe.text
+  p= recipe.description
   button(onclick=`deleteRecipe('${recipe._id}')`) Delete

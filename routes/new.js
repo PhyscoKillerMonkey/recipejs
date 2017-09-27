@@ -5,11 +5,21 @@ const router = require("express").Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    res.render("index", { title: "New recipe page" });
+    res.render("new", { title: "New recipe" });
   });
 
   router.post("/", (req, res) => {
-    console.log("Create recipe form has been sent, proxy and redirect to full recipe page");
+    const recipe = {};
+    ["title", "author", "time", "description"].forEach((field) => {
+      recipe[field] = req.body[field];
+    });
+
+    db.createRecipe(recipe, (err, result) => {
+      console.log(err, result.ops[0]);
+      if (!err) {
+        res.redirect(`/recipes/${result.ops[0]._id}`);
+      }
+    });
   });
 
   return router;

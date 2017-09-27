@@ -1,0 +1,26 @@
+extends layout
+
+block head
+  style.
+    form > * {
+      display: block;
+    }
+
+    input {
+      margin-bottom: 0.8rem;
+    }
+
+block content
+  h1 New recipe
+  
+  form(method="POST")
+    label(for="title") Title
+    input(name="title", type="text", autocomplete="off", value="Recipe title", required)
+    // Author should be a hidden form with the user's ID
+    label(for="author") Author
+    input(name="author", type="text", autocomplete="off", value="Reece Bennett", required)
+    label(for="time") Cooking time
+    input(name="time", type="number", autocomplete="off", value="140", min="1", required)
+    label(for="description") Description
+    input(name="description", type="text", autocomplete="off", value="A simple recipe", required)
+    input(type="submit")

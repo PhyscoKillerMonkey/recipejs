@@ -34,7 +34,7 @@ module.exports = (db) => {
 
     const recipe = {};
 
-    ["title", "author", "time", "text"].forEach((field) => {
+    ["title", "author", "time", "description"].forEach((field) => {
       recipe[field] = req.body[field];
     });
 
