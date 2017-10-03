@@ -9,10 +9,18 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const recipe = {};
+    const recipe = { "ingredients": [] };
+
     ["title", "author", "time", "description"].forEach((field) => {
       recipe[field] = req.body[field];
     });
+    
+    for (var i = 0; i < req.body["ingredient"].length; i++) {
+      recipe["ingredients"].push({
+        "ingredient": req.body["ingredient"][i],
+        "amount": req.body["amount"][i]
+      });
+    }
 
     db.createRecipe(recipe, (err, result) => {
       console.log(err, result.ops[0]);

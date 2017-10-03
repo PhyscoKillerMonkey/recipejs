@@ -15,4 +15,8 @@ block content
   h1.mainTitle= recipe.title
   h4.tagLine= recipe.author + " - " + formatTime(recipe.time)
   p= recipe.description
+  h2 Ingredients
+  ul
+    each ingredient in recipe.ingredients
+      li= ingredient.ingredient + " : " + ingredient.amount
   button(onclick=`deleteRecipe('${recipe._id}')`) Delete

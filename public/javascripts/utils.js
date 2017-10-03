@@ -1,5 +1,9 @@
 // public/javascripts/utils.js
 
+function byid(id) {
+  return document.getElementById(id);
+}
+
 function ajax(method, url, params, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open(method, url, true);

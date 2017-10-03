@@ -10,6 +10,36 @@ block head
       margin-bottom: 0.8rem;
     }
 
+    input[type="button"], input[type="submit"] {
+      cursor: pointer;
+    }
+
+  script.
+    function createInput(name, type, value) {
+      var el = document.createElement("input");
+      el.name = name;
+      el.type = type;
+      el.value = value;
+      el.autocomplete = "off";
+      el.required = true;
+      return el;
+    }
+
+    function addIngredient() {
+      var n = byid("ingredients").childElementCount;
+      var container = document.createElement("div");
+      var ingredient = createInput(`ingredient`, "text", "Ingredient");
+      var amount = createInput(`amount`, "text", "100g");
+      var deleteButton = createInput("", "button", "⨯");
+      deleteButton.onclick = function() {
+        container.remove();
+      }
+      container.appendChild(ingredient);
+      container.appendChild(amount);
+      container.appendChild(deleteButton);
+      byid("ingredients").appendChild(container);
+    }
+
 block content
   h1 New recipe
   
@@ -23,4 +53,11 @@ block content
     input(name="time", type="number", autocomplete="off", value="140", min="1", required)
     label(for="description") Description
     input(name="description", type="text", autocomplete="off", value="A simple recipe", required)
+    label Ingredients
+    #ingredients
+      div
+        input(name="ingredient", type="text", autocomplete="off", value="Ingredient", required)
+        input(name="amount", type="text", autocomplete="off", value="100g", required)
+        input(type="button", value="⨯", disabled)
+    input(type="button", value="Add ingredient", onclick="javascript:addIngredient()")
     input(type="submit")
