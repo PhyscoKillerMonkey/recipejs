@@ -26,18 +26,25 @@ block head
     }
 
     function addIngredient() {
-      var n = byid("ingredients").childElementCount;
       var container = document.createElement("div");
-      var ingredient = createInput(`ingredient`, "text", "Ingredient");
-      var amount = createInput(`amount`, "text", "100g");
+      var ingredient = createInput("ingredient", "text", "Ingredient");
+      var amount = createInput("amount", "text", "100g");
       var deleteButton = createInput("", "button", "⨯");
-      deleteButton.onclick = function() {
-        container.remove();
-      }
+      deleteButton.onclick = function() { container.remove(); }
       container.appendChild(ingredient);
       container.appendChild(amount);
       container.appendChild(deleteButton);
       byid("ingredients").appendChild(container);
+    }
+
+    function addStep() {
+      var container = document.createElement("div");
+      var step = createInput("method", "text", "Step");
+      var deleteButton = createInput("", "button", "⨯");
+      deleteButton.onclick = function() { container.remove(); }
+      container.appendChild(step);
+      container.appendChild(deleteButton);
+      byid("method").appendChild(container);
     }
 
 block content
@@ -60,4 +67,10 @@ block content
         input(name="amount", type="text", autocomplete="off", value="100g", required)
         input(type="button", value="⨯", disabled)
     input(type="button", value="Add ingredient", onclick="javascript:addIngredient()")
+    label Method
+    #method
+      div
+        input(name="method", type="text", autocomplete="off", value="Step", required)
+        input(type="button", value="⨯", disabled)
+    input(type="button", value="Add step", onclick="javascript:addStep()")
     input(type="submit")

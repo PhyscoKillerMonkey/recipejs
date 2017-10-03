@@ -18,5 +18,9 @@ block content
   h2 Ingredients
   ul
     each ingredient in recipe.ingredients
-      li= ingredient.ingredient + " : " + ingredient.amount
+      li= ingredient.ingredient + ": " + ingredient.amount
+  h2 Method
+  ol
+    each step in recipe.method
+      li= step
   button(onclick=`deleteRecipe('${recipe._id}')`) Delete
