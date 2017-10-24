@@ -3,8 +3,8 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const MongoClient = require("mongodb").MongoClient;
-const db = require("./config/db");
+const mongoose = require("mongoose");
+const dbConfig = require("./config/db");
 
 const app = express();
 const port = 8080;
@@ -19,20 +19,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Connect to the database server
-MongoClient.connect(db.url, (err, database) => {
-  if (err) {
-    console.error("Database connection failed: " + err);
-    return;
-  }
+mongoose.connect(dbConfig.url, { useMongoClient: true });
 
-  // Create the database controller
-  const dcController = require("./dbController.js")(database);
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", () => {
 
   // Define routes
   app.use("/", require("./routes/index"));
-  app.use("/recipes", require("./routes/recipes")(dcController));
-  app.use("/new", require("./routes/new")(dcController));
-  app.use("/api", require("./routes/api")(dcController));
+  app.use("/recipes", require("./routes/recipes"));
+  app.use("/new", require("./routes/new"));
+  //app.use("/api", require("./routes/api"));
 
   // Database connected, start the server now
   app.listen(port, () => {
