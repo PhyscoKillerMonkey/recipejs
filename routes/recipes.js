@@ -26,7 +26,7 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   console.log(`Delete recipe with ID: ${req.params.id}`);
 
-  Recipe.findOneAndRemove(req.params.id, (err, docs) => {
+  Recipe.findByIdAndRemove(req.params.id, (err, docs) => {
     if (err) {
       res.status(400).json({ error: err });
     } else {
