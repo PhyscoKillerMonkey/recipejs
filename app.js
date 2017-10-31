@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Connect to the database server
+console.log("Connecting to the database...");
 mongoose.connect(dbConfig.url, { useMongoClient: true });
 
 let db = mongoose.connection;

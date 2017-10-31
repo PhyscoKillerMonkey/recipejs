@@ -2,6 +2,7 @@
 
 const router = require("express").Router();
 const Recipe = require("../models/recipe");
+const slug = require("slug");
 
 router.get("/", (req, res) => {
   res.render("new", { title: "New recipe" });
@@ -9,6 +10,9 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   let recipe = new Recipe();
+
+  // Use Slug package here to url encode
+  recipe._id = slug(req.body.title.toLowerCase());
 
   recipe["ingredients"] = [];
   recipe["method"] = [];
@@ -38,9 +42,12 @@ router.post("/", (req, res) => {
   }
 
   recipe.save((err) => {
-    if (err) res.status(400).json({ error: err });
-    res.redirect(`/recipes/${recipe._id}`)
-  })
+    if (err) {
+      res.status(400).json({ error: err });
+    } else {
+      res.redirect(`/recipes/${recipe._id}`)
+    }
+  });
 });
 
 module.exports = router;
